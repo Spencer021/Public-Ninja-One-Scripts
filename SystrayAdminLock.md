@@ -1,6 +1,13 @@
-# Restricting NinjaOne System Tray Scripts to Admin-Only Access
+# Restricting NinjaOne System Tray Scripts to 'Admin-Only' Access
 
-This guide covers how to create scripts for the NinjaOne system tray and configure some to execute exclusively for administrators as allowed by a checkbox inside NinjaOne, enhancing security and control over script execution.
+This guide explains how to create scripts for the NinjaOne system tray and configure some to run exclusively for administrators, using a checkbox within NinjaOne to control access. This approach enhances security and oversight for script execution. However, this method is best suited for restricting scripts that you’d prefer end users not interact with, rather than for critical security measures. It’s ideal for minor administrative tasks where accidental access wouldn’t pose a significant security risk, not for safeguarding highly sensitive operations.
+
+**Disclaimer**: I am not responsible for any actions you take based on this guide or the outcomes that result from implementing these configurations. Use at your own discretion and ensure they align with your organization’s security policies.
+
+**Resources and Credits**:  
+- All icons and fonts referenced in this guide can be found at [Google Fonts - Material Symbols Outlined](https://fonts.google.com/?selected=Material+Symbols+Outlined:automation:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%23e3e3e3).  
+- Special thanks to the [NinjaOne Stream](https://www.youtube.com/watch?v=qBhk0awc3-c) for inspiration and insights.  
+- Shoutout to JT (MrDrProfessorJT) and Trevor (StrikerTS) for sharing that resource, and to Joseph for the inspiration!
 
 ## Step 1: Access Global Custom Fields
 Navigate to **Settings > Administration > Global Custom Fields** in the NinjaOne interface to begin setting up the necessary configurations.
@@ -85,3 +92,9 @@ Next, let’s configure the NinjaOne system tray to clearly distinguish and orga
 - **Automation**: Nest your admin-only automations (e.g., scripts with the `AdminStatus` check) under the "Admin Only Scripts" group. This nesting ensures these scripts appear as submenu items beneath the group label, keeping them organized and clearly tied to their admin-only purpose.
 
 This configuration not only isolates admin scripts visually in the system tray but also reinforces their restricted access through the `AdminStatus` check, providing a seamless experience for technicians.
+
+See below for a visual guide on the systray setup, and the message a user will see if they dont have the permissions to run this.
+
+<img src="https://github.com/user-attachments/assets/6fa5af98-e91d-49a6-b1e8-24e474745bb1" alt="Admin Only Scripts System Tray Example" width="300"> <img src="https://github.com/user-attachments/assets/3e9481d7-bfbc-4106-90d4-dc4b03d5a6c7" alt="Invalid rights message" width="300">
+
+
