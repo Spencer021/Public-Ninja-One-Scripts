@@ -66,11 +66,11 @@ else {
 ```
 ## Configuring the System Tray for Admin-Only Scripts
 
-Next, let’s set up the NinjaOne system tray to clearly identify and organize scripts restricted to admin use. This ensures they’re easily distinguishable and properly secured.
+Next, let’s configure the NinjaOne system tray to clearly distinguish and organize scripts reserved for admin use. This setup ensures they’re both easily recognizable and securely managed.
 
 ### Steps:
 1. Go to **Administration > Branding > Systray** in the NinjaOne interface.
-2. Either create a new system tray configuration or modify an existing one.
+2. Either create a new system tray configuration or edit an existing one.
 3. Add the following elements to structure your admin-only scripts:
 
 | Menu Item Type    | Details                     |
@@ -80,8 +80,8 @@ Next, let’s set up the NinjaOne system tray to clearly identify and organize s
 | Automation        | Your admin-specific scripts |
 
 ### Explanation:
-- **Separator**: Adds a dividing line in the tray menu for better organization.
-- **Group**: Creates a labeled section called "Admin Only Scripts" to group restricted scripts together.
-- **Automation**: Links your admin-only automations (e.g., scripts with the `AdminStatus` check) under this group.
+- **Separator**: Inserts a dividing line in the tray menu to enhance visual separation.
+- **Group**: Establishes a labeled section titled "Admin Only Scripts" to categorize restricted scripts.
+- **Automation**: Nest your admin-only automations (e.g., scripts with the `AdminStatus` check) under the "Admin Only Scripts" group. This nesting ensures these scripts appear as submenu items beneath the group label, keeping them organized and clearly tied to their admin-only purpose.
 
-This setup visually separates and identifies admin-only scripts in the system tray, making it intuitive for technicians while maintaining security through the `AdminStatus` restriction.
+This configuration not only isolates admin scripts visually in the system tray but also reinforces their restricted access through the `AdminStatus` check, providing a seamless experience for technicians.
