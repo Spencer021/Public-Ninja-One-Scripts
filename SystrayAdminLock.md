@@ -1,6 +1,6 @@
 # Restricting NinjaOne System Tray Scripts to Admin-Only Access
 
-This guide covers how to create scripts for the NinjaOne system tray and configure some to execute exclusively for administrators, enhancing security and control over script execution.
+This guide covers how to create scripts for the NinjaOne system tray and configure some to execute exclusively for administrators as allowed by a checkbox inside NinjaOne, enhancing security and control over script execution.
 
 ## Step 1: Access Global Custom Fields
 Navigate to **Settings > Administration > Global Custom Fields** in the NinjaOne interface to begin setting up the necessary configurations.
