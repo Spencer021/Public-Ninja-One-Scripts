@@ -64,3 +64,24 @@ else {
     Write-Output "AdminStatus is already in a disabled state."
 }
 ```
+## Configuring the System Tray for Admin-Only Scripts
+
+Next, let’s set up the NinjaOne system tray to clearly identify and organize scripts restricted to admin use. This ensures they’re easily distinguishable and properly secured.
+
+### Steps:
+1. Go to **Administration > Branding > Systray** in the NinjaOne interface.
+2. Either create a new system tray configuration or modify an existing one.
+3. Add the following elements to structure your admin-only scripts:
+
+| Menu Item Type    | Details                     |
+|-------------------|-----------------------------|
+| Separator         | (Creates a visual break)   |
+| Group             | Label: "Admin Only Scripts" |
+| Automation        | Your admin-specific scripts |
+
+### Explanation:
+- **Separator**: Adds a dividing line in the tray menu for better organization.
+- **Group**: Creates a labeled section called "Admin Only Scripts" to group restricted scripts together.
+- **Automation**: Links your admin-only automations (e.g., scripts with the `AdminStatus` check) under this group.
+
+This setup visually separates and identifies admin-only scripts in the system tray, making it intuitive for technicians while maintaining security through the `AdminStatus` restriction.
