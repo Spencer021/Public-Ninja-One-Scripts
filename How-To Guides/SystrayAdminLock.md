@@ -5,7 +5,7 @@ This guide explains how to create scripts for the NinjaOne system tray and confi
 **Disclaimer**: I am not responsible for any actions you take based on this guide or the outcomes that result from implementing these configurations. Use at your own discretion and ensure they align with your organization’s security policies.
 
 **Resources and Credits**:  
-- All icons and fonts referenced in this guide can be found at [Google Fonts - Material Symbols Outlined](https://fonts.google.com/icons?icon.size=24&icon.color=%23e3e3e3).  
+- All icons and fonts referenced in this guide can be found at [Google Fonts - Symbols & Icons](https://fonts.google.com/icons?icon.size=24&icon.color=%23e3e3e3).  
 - Special thanks to the [NinjaOne Stream](https://www.youtube.com/watch?v=qBhk0awc3-c) for inspiration and insights.  
 - Shoutout to JT (MrDrProfessorJT) and Trevor (StrikerTS) for sharing that resource, and to Joseph for the inspiration!
 
