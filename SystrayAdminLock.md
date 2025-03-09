@@ -28,18 +28,22 @@ Incorporate the following PowerShell code into any system tray script you want t
 
 ```powershell
 $AdminStatusFieldName = "AdminStatus"
-$MessageBoxTitle = "Access Denied"
-$MessageBoxMessage = "This script requires administrative privileges. Please contact your administrator for assistance."
-$MessageBoxButton = "OK"
-$MessageBoxIcon = "Information"
+$MessageTitle = "Access Denied"
+$MessageBody = "This script requires administrative privileges. Contact your admin for assistance."
 
 $AdminStatus = Ninja-Property-Get $AdminStatusFieldName
 if ($AdminStatus -ne 1) {
-    Add-Type -AssemblyName PresentationFramework
-    [System.Windows.MessageBox]::Show($MessageBoxMessage, $MessageBoxTitle, $MessageBoxButton, $MessageBoxIcon)
-}
-else {
-    ### Place your admin-only script code here
+    $Session = Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -ExpandProperty UserName
+    if ($Session) {
+        $Username = $Session.Split('\')[1]
+        Invoke-Expression "msg $($Username) /TIME:30 '$MessageTitle - $MessageBody'"
+        Write-Output "Message sent to $($Username): Admin access required."
+    } else {
+        Write-Output "No active user session detected to notify."
+    }
+} else {
+    ## Insert Script to run here!
+    Write-Output "Admin access granted. Running admin script."
 }
 ```
 
