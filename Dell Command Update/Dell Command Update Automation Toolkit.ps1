@@ -72,7 +72,7 @@ function Handle-DCUExitCode {
     switch ($ExitCode) {
         0 {
             Ninja-Property-Set $firmwareBiosUpdateField "BIOS/Firmware Updates Available"
-            Ninja-Property-Set $biosFirmwareUpdatesField $ScanOutput
+            $scanoutput | Ninja-Property-Set-piped $biosFirmwareUpdatesField 
         }
         { $_ -in 1, 5 } {
             Ninja-Property-Set $firmwareBiosUpdateField "Reboot Required"
