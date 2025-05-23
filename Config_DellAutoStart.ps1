@@ -1,3 +1,39 @@
+<#
+.SYNOPSIS
+    Automates Dell Auto-On configuration for Dell systems within NinjaOne.
+    This script manages the setup of automatic power-on schedules.
+
+.DESCRIPTION
+    This script streamlines Dell system power management by interfacing with the Dell PowerShell Provider.. 
+    Key features include:
+    - Validates the system as a Dell device and checks for administrative privileges.
+    - Downloads and installs the DellBIOSProvider module (version 2.9.0) to a custom directory (C:\RMMTools) if not already present.
+    - Checks for BIOS Admin or System passwords and exits if set, as password-protected systems require manual intervention.
+    - Configures Auto-On settings based on user-defined variables for day, hour, and minute, ensuring the system powers on at the specified schedule.
+    - Verifies and displays the final Auto-On settings for confirmation.
+
+    The script’s behavior is controlled via preset variables defined at the start of the script. Users can configure these variables to set the desired Auto-On schedule:
+    - $AutoOnDay: Specifies the Auto-On mode (e.g., "EveryDay", "Weekdays", "SelectDays", "Disabled").
+    - $AutoOnHr: Sets the hour (0–23, 24-hour format, e.g., 22 for 10:00 PM).
+    - $AutoOnMin: Sets the minute (0–59, e.g., 0 for zero minutes past the hour).
+
+     A manual system restart is required after execution to apply BIOS changes.
+
+.AUTHOR
+    By: Spencer Heath
+    DATE: 23 May 2025
+
+.GITHUB
+    https://github.com/Sp-e-n-c-er
+
+.NOTES
+    **Disclaimer**: This script is provided "as is" under the MIT License.
+    Use at your own risk; the author is not responsible for any damages or issues arising from its use.
+    Licensed under MIT: Copyright (c) Spencer Heath. Permission is granted to use, copy, modify, and distribute this software freely,
+    provided the original copyright and this notice are retained. See https://opensource.org/licenses/MIT for full details.
+#>
+
+
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Output "Exiting script, please run as Administrator!"
     exit
