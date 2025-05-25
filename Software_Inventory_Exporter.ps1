@@ -56,15 +56,15 @@
 #>
 
 Add-Type -AssemblyName PresentationFramework -ErrorAction Stop
-Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop # For FolderBrowserDialog
-Add-Type -AssemblyName System.Net.Http # For async HTTP requests
+Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
+Add-Type -AssemblyName System.Net.Http
 
-# Initialize HttpClient for async HTTP requests
+
 $httpClientHandler = New-Object System.Net.Http.HttpClientHandler
 $httpClient = New-Object System.Net.Http.HttpClient($httpClientHandler)
 $httpClient.Timeout = [System.TimeSpan]::FromSeconds(30)
 
-# Global variables for API credentials and token
+
 $global:NinjaOneInstance = ''
 $global:NinjaOneClientId = ''
 $global:NinjaOneClientSecret = ''
@@ -203,7 +203,6 @@ $CppRedistApps = @(
     "Microsoft C++ Redistributable"
 )
 
-# Helper function to convert size from bytes to readable format (KB, MB, GB)
 function Convert-SizeToReadable {
     param (
         [Parameter(Mandatory=$true)]
@@ -224,7 +223,7 @@ function Convert-SizeToReadable {
     }
 }
 
-# Helper function to convert Unix timestamp to readable date-time
+
 function Convert-UnixTimestampToDateTime {
     param (
         [Parameter(Mandatory=$true)]
@@ -236,7 +235,7 @@ function Convert-UnixTimestampToDateTime {
     $dateTime.ToString("MM/dd/yyyy hh:mm:ss tt")
 }
 
-# Global cache for software list
+
 $global:CachedSoftware = @()
 
 function Get-NinjaOneToken {
@@ -248,7 +247,7 @@ function Get-NinjaOneToken {
             return $global:NinjaToken
         }
         else {
-            # Create a proper Dictionary<string,string>
+         
             $dict = New-Object 'System.Collections.Generic.Dictionary[string,string]'
 
             if ($Script:NinjaOneRefreshToken) {
@@ -264,11 +263,11 @@ function Get-NinjaOneToken {
                 $dict.Add('scope', 'monitoring management')
             }
 
-            # Use the dictionary with FormUrlEncodedContent
+         
             $formContent = [System.Net.Http.FormUrlEncodedContent]::new($dict)
             $uri = "https://$($global:NinjaOneInstance -replace '/ws','')/ws/oauth/token"
 
-            # Make async HTTP POST request
+      
             $responseTask = $httpClient.PostAsync($uri, $formContent)
             $response = $responseTask.GetAwaiter().GetResult()
 
