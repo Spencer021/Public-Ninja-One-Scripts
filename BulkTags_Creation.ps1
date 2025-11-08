@@ -9,12 +9,9 @@
     the /v2/tag endpoint for each tag listed in the CSV file.
 
     Key features include:
-    - Authenticates automatically using the NinjaOne API (no manual token entry).
+    - Authenticates using the NinjaOne API
     - Reads a simple CSV file with columns: Name, Description.
     - Posts each entry as a new tag in NinjaOne.
-
-    Ideal for initial setup, standardizing environments, or migrating tag structures.
-    Minimal setup required — just fill in your Client ID, Secret, and CSV path.
 
 .PARAMETERS
     $BaseUrl:       Your NinjaOne region base URL (e.g., https://app.ninjarmm.com)
