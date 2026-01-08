@@ -141,6 +141,34 @@ function Handle-DCUExitCode {
     }
 }
 
+function Get-DeviceCompatibility {
+    # Check if OS is Server and exit if true
+    if ((Get-WmiObject Win32_OperatingSystem).ProductType -ne 1) {
+        Write-Output "Server OS detected. Exiting."
+        Ninja-Property-Set $firmwareBiosUpdateField "Server OS detected: "
+        Ninja-Property-Set $biosFirmwareUpdatesField "Server OS detected - $(Get-Date)"
+        exit 0
+    }
+
+    # Check manufacturer and exit if not Dell
+    $manufacturer = (Get-WmiObject Win32_ComputerSystem).Manufacturer
+    if ($manufacturer -notlike "*Dell*") {
+        Write-Output "Non-Dell device detected. Exiting."
+        Ninja-Property-Set $firmwareBiosUpdateField "Non-Dell device detected: $manufacturer"
+        Ninja-Property-Set $biosFirmwareUpdatesField "Non-Dell device detected: : $manufacturer - $(Get-Date)"
+        exit 0
+    }
+
+    # Check model and exit if incompatible (Update as compatible models are discovered)
+    $model = (Get-WmiObject Win32_ComputerSystem).Model
+    if ($model -notmatch "Optiplex|Precision|Latitude|XPS") {
+        Write-Output "Non-compatible model detected: $model. Exiting."
+        Ninja-Property-Set $firmwareBiosUpdateField "Non-compatible model: $model"
+        Ninja-Property-Set $biosFirmwareUpdatesField "Non-compatible model: $model - $(Get-Date)"
+        exit 0
+    }
+}
+
 function Invoke-PreinstallChecks {
     $IncompatibleApps = Get-ChildItem -Path $RegPaths | Get-ItemProperty | Where-Object { $_.DisplayName -like 'Dell Update*' }
     foreach ($App in $IncompatibleApps) {
@@ -300,25 +328,32 @@ function Invoke-DCUBiosFirmwareScan {
 
 switch ($env:pleaseSelectAnOptionToRun) {
     "Install" {
+        Get-DeviceCompatibility
         Invoke-PreinstallChecks
         Install-DCU
     }
     "Remove Incompatible Versions" {
+        Get-DeviceCompatibility
         Invoke-PreinstallChecks
     }
     "Run Scan" {
+        Get-DeviceCompatibility
         Invoke-DCUScan
     }
     "Run BIOS and Firmware Scan" {
+        Get-DeviceCompatibility
         Invoke-DCUBiosFirmwareScan
     }
     "Run Scan And Install All" {
+        Get-DeviceCompatibility
         Invoke-DCUandInstall -UpdateType 'all'
     }
     "Run Scan And Install Excluding BIOS and Firmware" {
+        Get-DeviceCompatibility
         Invoke-DCUandInstall -UpdateType 'driver,application'
     }
     "Run Scan And Install BIOS and Firmware ONLY" {
+        Get-DeviceCompatibility
         Invoke-DCUandInstall -UpdateType 'firmware,bios'
     }
     default {
