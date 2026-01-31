@@ -47,6 +47,14 @@
     ✅ Interactive filtering and CSV export
     ✅ Modern, responsive HTML output
     ✅ Automatic browser launch
+
+    .AUTHOR
+      Spencer Heath (https://github.com/Spencer021)
+
+    .LICENSE
+      This script is provided "as is" without warranty of any kind, either expressed or implied.
+      I (Spencer) assumes no liability or responsibility for any damage, loss, or issues arising
+      from the use, modification, or distribution of this script. Use at your own risk.
 #>
 
 [CmdletBinding()]
